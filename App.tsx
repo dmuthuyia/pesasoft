@@ -27,6 +27,9 @@ import ChatListScreen from './src/screens/chat/ChatListScreen';
 import SettingsScreen from './src/screens/settings/SettingsScreen';
 import CardsScreen from './src/screens/cards/CardsScreen';
 import AddCardScreen from './src/screens/cards/AddCardScreen';
+import NotificationsScreen from './src/screens/notifications/NotificationsScreen';
+import TransactionDetailsScreen from './src/screens/transactions/TransactionDetailsScreen';
+import ContactsScreen from './src/screens/contacts/ContactsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,6 +64,11 @@ const TabNavigator = () => {
           paddingBottom: 8,
           paddingTop: 8,
           height: 70,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 8,
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -84,6 +92,20 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: { backgroundColor: '#FFFFFF' },
+        cardStyleInterpolator: ({ current, layouts }) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0],
+                  }),
+                },
+              ],
+            },
+          };
+        },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -99,6 +121,20 @@ const MainStack = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: { backgroundColor: '#F9FAFB' },
+        cardStyleInterpolator: ({ current, layouts }) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0],
+                  }),
+                },
+              ],
+            },
+          };
+        },
       }}
     >
       <Stack.Screen name="MainTabs" component={TabNavigator} />
@@ -109,6 +145,9 @@ const MainStack = () => {
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Cards" component={CardsScreen} />
       <Stack.Screen name="AddCard" component={AddCardScreen} />
+      <Stack.Screen name="Notifications" component={NotificationsScreen} />
+      <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen} />
+      <Stack.Screen name="Contacts" component={ContactsScreen} />
     </Stack.Navigator>
   );
 };
