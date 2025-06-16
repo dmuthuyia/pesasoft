@@ -1,0 +1,38 @@
+JUNE 2025 REACT NATIVE SPECS
+React Native app (non-Expo) on Windows using Android Studio Meerkat (2024.3.1 Patch 2) and React Native
+
+1. Java Development Kit (JDK) - Recommended JDK version: JDK 17
+NOTE:React Native is not fully compatible with JDK 21 or 24 yet due to Gradle plugin/tooling constraints.
+COMMAND: setx JAVA_HOME "C:\Program Files\Java\jdk-17"
+ENVIRONMENT SYSTEM VARIABLES
+
+JAVA_HOME	C:\Program Files\Java\jdk-17
+ANDROID_HOME	C:\Users\Dennis\AppData\Local\Android\Sdk
+PATH:
+%JAVA_HOME%\bin	
+%ANDROID_HOME%\platform-tools
+%ANDROID_HOME%\emulator
+%ANDROID_HOME%\tools
+
+
+2. Node.js - Recommended version: Node.js 18.x LTS
+COMMAND: NVM INSTALL 18 - NVM USE 18
+
+3. React Native CLI
+Install the CLI globally - React Native no longer requires or recommends globally installing either react-native-cli or @react-native-community/cli.
+To clean up old installs (optional but recommended):
+
+npm uninstall -g react-native-cli
+npm uninstall -g @react-native-community/cli
+
+3.1 Correct and Modern Way (2025) - React Native apps now use project-local CLI tools via npx:
+
+//Create project - You do not need to first install react native. For React Native ≥ 0.71, TypeScript comes built-in to the official template.
+
+npx @react-native-community/cli@latest init Pesasoft --version 0.73.6
+
+React Native CLI tooling as of 2025 is still using @react-native-community/cli ...under the hood, but the wrapper (from npx react-native) can sometimes break due to(Git identity issues, Cache inconsistencies, npm resolution conflicts)
+
+//f you’re targeting React Native < 0.71, or a really old template
+npx @react-native-community/cli@latest init Pesasoft \
+  --template react-native-template-typescript@6.2.0
